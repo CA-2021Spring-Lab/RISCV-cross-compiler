@@ -24,8 +24,8 @@ WORKDIR $HOME/source/riscv-gnu-toolchain
 
 # RUN ./configure --prefix=$HOME/riscv --with-arch=rv32gc --with-abi=ilp32d
 # RUN ./configure --prefix=$HOME/riscv --enable-multilib
-RUN ./configure --prefix=$HOME/riscv
-RUN make SIM=qemu
+RUN ./configure --prefix=$HOME/riscv --with-arch=rv64i
+RUN make -j$(nproc) SIM=qemu
 
 ENV PATH="$HOME/riscv/bin:$PATH"
 
@@ -42,18 +42,16 @@ ENV PATH="$HOME/riscv/bin:$PATH"
 
 # qemu
 
-RUN mkdir $HOME/riscv/qemu
+RUN mkdir -p $HOME/riscv/qemu
 RUN apt install -y ninja-build libglib2.0-dev pkg-config libmount-dev libpixman-1-dev
 WORKDIR $HOME/source/riscv-gnu-toolchain/qemu
 RUN ./configure --target-list=riscv64-softmmu,riscv64-linux-user --prefix=/workshop/riscv/qemu
-RUN make
+RUN make -j$(nproc)
 RUN make install
 
 ENV PATH="$HOME/riscv/qemu/bin:$PATH"
 
-RUN mkdir $HOME/src
+RUN mkdir -p $HOME/src
 WORKDIR $HOME/src
-
-# COPY helloworld.c $HOME/src/
 
 CMD ["bash"]

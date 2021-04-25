@@ -1,7 +1,7 @@
 version: "3.9" 
 services:
   riscv-toolchain:
-    image: hoshinotouko/riscv-toolchain-basement:debian-buster
+    image: riscv-toolchain
     container_name: riscv-toolchain
     volumes:
       - ./src:/workshop/src
