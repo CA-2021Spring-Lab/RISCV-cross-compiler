@@ -71,6 +71,7 @@ clone 仓库
 
 ```bash
 git clone https://github.com/CA-2021Spring-Lab/RISCV-cross-compiler
+# or git clone https://gitee.com/ca-2021-spring-lab/RISCV-cross-compiler
 cd RISCV-cross-compiler
 ```
 
